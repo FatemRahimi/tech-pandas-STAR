@@ -4,12 +4,12 @@ import pgSessionStore from "connect-pg-simple";
 import apiRouter from "./api";
 import config from "./utils/config";
 import {
-    clientRouter,
-    configuredHelmet,
-    configuredMorgan,
-    ensureAuthenticated,
-    httpsOnly,
-    logErrors,
+	clientRouter,
+	configuredHelmet,
+	configuredMorgan,
+	ensureAuthenticated,
+	httpsOnly,
+	logErrors,
 } from "./utils/middleware";
 
 const apiRoot = "/api";
@@ -21,19 +21,18 @@ app.use(configuredHelmet());
 app.use(configuredMorgan());
 
 app.use(session({
-    store: new (pgSessionStore(session))({
-        // insert connect-pg-simple options here
-    }),
-    secret: config.cookie_secret,
-    resave: false,
-    saveUninitialized: true,  // Added this line to address the deprecation warning
+	store: new (pgSessionStore(session))({
+		// insert connect-pg-simple options here
+	}),
+	secret: config.cookie_secret,
+	resave: false,
 }));
 
 app.use(ensureAuthenticated());
 
 if (config.production) {
-    app.enable("trust proxy");
-    app.use(httpsOnly());
+	app.enable("trust proxy");
+	app.use(httpsOnly());
 }
 
 app.use(apiRoot, apiRouter);
