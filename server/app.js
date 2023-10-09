@@ -23,6 +23,8 @@ app.use(configuredMorgan());
 app.use(session({
 	store: new (pgSessionStore(session))({
 		// insert connect-pg-simple options here
+		saveUninitialized: true,
+
 	}),
 	secret: config.cookie_secret,
 	resave: false,
