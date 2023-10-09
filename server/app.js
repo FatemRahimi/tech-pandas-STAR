@@ -26,7 +26,7 @@ app.use(session({
 	}),
 	secret: config.cookie_secret,
 	resave: false,
-
+	saveUninitialized: true,
 }));
 
 app.use(ensureAuthenticated());
